@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #5c94fc; /* Sky blue */
+  height: 100vh;
+  overflow: hidden;
+}
+
+#game {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#mario {
+  position: absolute;
+  bottom: 100px;
+  left: 50px;
+  width: 40px;
+  height: 50px;
+  background: url('https://i.imgur.com/L1Zx7gU.png') no-repeat;
+  background-size: cover;
+  transition: transform 0.1s;
+}
+
+#ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #228B22; /* Green */
+}
