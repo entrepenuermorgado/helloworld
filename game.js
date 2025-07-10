@@ -1,6 +1,9 @@
 const mario = document.getElementById("mario");
 const goomba = document.getElementById("goomba");
+const coin = document.getElementById("coin");
+const scoreDisplay = document.getElementById("score");
 const platforms = document.querySelectorAll(".platform");
+const coinSound = document.getElementById("coinSound");
 
 let marioX = 50;
 let marioY = 100;
@@ -8,6 +11,7 @@ let velocityY = 0;
 let gravity = 1.5;
 let isJumping = false;
 let gameOver = false;
+let score = 0;
 
 let goombaX = 500;
 let goombaDirection = -1;
@@ -35,26 +39,23 @@ function update() {
   velocityY += gravity;
   marioY -= velocityY;
 
-  // Floor
   if (marioY <= 100) {
     marioY = 100;
     velocityY = 0;
     isJumping = false;
   }
 
-  // Platform collision
   const marioRect = mario.getBoundingClientRect();
+
   platforms.forEach((platform) => {
     const platRect = platform.getBoundingClientRect();
-
-    const standingOnTop =
+    if (
       marioRect.bottom >= platRect.top &&
       marioRect.bottom <= platRect.top + 20 &&
       marioRect.right >= platRect.left &&
       marioRect.left <= platRect.right &&
-      velocityY <= 0;
-
-    if (standingOnTop) {
+      velocityY <= 0
+    ) {
       marioY = window.innerHeight - platRect.top;
       velocityY = 0;
       isJumping = false;
@@ -63,14 +64,10 @@ function update() {
 
   mario.style.bottom = marioY + "px";
 
-  // Move goomba
   goombaX += goombaDirection * 2;
-  if (goombaX < 400 || goombaX > 600) {
-    goombaDirection *= -1;
-  }
+  if (goombaX < 400 || goombaX > 600) goombaDirection *= -1;
   goomba.style.left = goombaX + "px";
 
-  // Collision Mario vs Goomba
   const goombaRect = goomba.getBoundingClientRect();
   if (
     marioRect.left < goombaRect.right &&
@@ -81,6 +78,20 @@ function update() {
     document.body.innerHTML = `<h1 style="color:red;text-align:center;margin-top:20%;">💀 Game Over 💀</h1>`;
     gameOver = true;
     return;
+  }
+
+  const coinRect = coin.getBoundingClientRect();
+  if (
+    coin.style.display !== "none" &&
+    marioRect.left < coinRect.right &&
+    marioRect.right > coinRect.left &&
+    marioRect.bottom > coinRect.top &&
+    marioRect.top < coinRect.bottom
+  ) {
+    coin.style.display = "none";
+    score += 10;
+    scoreDisplay.textContent = "Score: " + score;
+    coinSound.play();
   }
 
   requestAnimationFrame(update);
