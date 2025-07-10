@@ -7,6 +7,7 @@
 </head>
 <body>
   <div id="game">
+    <div id="score">Score: 0</div>
     <div id="mario"></div>
 
     <!-- Platforms -->
@@ -15,11 +16,19 @@
     <div class="platform" style="left: 650px; bottom: 150px;"></div>
 
     <!-- Enemy -->
-    <div class="enemy" id="goomba"></div>
+    <div class="enemy" id="goomba" style="left: 500px;"></div>
+
+    <!-- Coin -->
+    <div class="coin" id="coin" style="left: 450px; bottom: 340px;"></div>
 
     <!-- Ground -->
     <div id="ground"></div>
   </div>
+
+  <!-- Coin Sound -->
+  <audio id="coinSound">
+    <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAwF0AAIC7AAACABAAZGF0YQAAAAA=" type="audio/wav">
+  </audio>
 
   <script src="game.js"></script>
 </body>
