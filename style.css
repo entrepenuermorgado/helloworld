@@ -7,12 +7,21 @@
 body {
   background-color: #5c94fc;
   overflow: hidden;
+  font-family: sans-serif;
 }
 
 #game {
   position: relative;
   width: 100vw;
   height: 100vh;
+}
+
+#score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  color: white;
 }
 
 #mario {
@@ -40,6 +49,14 @@ body {
   width: 40px;
   height: 40px;
   background: url('https://i.imgur.com/Wb1qfhK.png') no-repeat;
+  background-size: cover;
+}
+
+.coin {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: url('https://i.imgur.com/oH69tVI.png') no-repeat;
   background-size: cover;
 }
 
